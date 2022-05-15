@@ -1,12 +1,14 @@
 import Board from "./Components/Board";
 
 function App() {
-
-  const boardArray = Array(64);
-  for(let i = 0; i < boardArray.length; i++){
-    boardArray[i] = i;
+  const boardArray = [];
+  for(let i = 0; i < 8; i++){
+    const newRow =[];
+    for(let j = 0; j < 8; j++){
+      newRow.push({'x': i, 'y': j});
+    }
+    boardArray.push(newRow);
   }
-
   return (
     <div className="App">
       <Board arr={boardArray}/>

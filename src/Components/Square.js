@@ -1,12 +1,15 @@
 import React from 'react'
 
-function Square({white}) {
+function Square({x, y, white}) {
   let c = 'square';
   if(white)
     c+=' light';
-  console.log(c);
+
+  const squareClick = () =>{
+    console.log(`Clicked ${x} ${y}`);
+  }
   return (
-    <div className={c}></div>
+    <div className={c} onClick={squareClick}>{x+""+y}</div>
   )
 }
 
