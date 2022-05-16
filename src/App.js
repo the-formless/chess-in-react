@@ -1,14 +1,20 @@
 import Board from "./Components/Board";
 
-function App() {
+function getChessBoardArray() {
+  const files = [null, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   const boardArray = [];
-  for(let i = 0; i < 8; i++){
-    const newRow =[];
-    for(let j = 0; j < 8; j++){
-      newRow.push({'x': i, 'y': j});
+  for(let i = 1; i <= 8; i++){
+    const rank =[];
+    for(let j = 1; j < files.length; j++){
+      rank.push(files[j] + i);
     }
-    boardArray.push(newRow);
+    boardArray.unshift(rank);
   }
+  return boardArray;
+}
+
+function App() {
+  const boardArray = getChessBoardArray();
   return (
     <div className="App">
       <Board arr={boardArray}/>

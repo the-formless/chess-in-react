@@ -4,16 +4,23 @@
   max-width: 555px;
 }
 
+.piece {
+  position: absolute;
+  bottom: 1%;
+  left: 3%;
+  height: 100%;
+  width: auto;
+}
 .chessBoard {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, auto);
 }
 
 .square {
+  position: relative;
   aspect-ratio: 1;
   color: white;
-  background-color: rgb(88, 50, 0);
+  background-color: rgb(160, 99, 19);
 }
 .light {
   background-color: wheat;
