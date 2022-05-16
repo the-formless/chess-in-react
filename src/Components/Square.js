@@ -1,11 +1,14 @@
 import {getPieceImage} from "./Dependencies/pieceRetriever.js"
 
-function Square({square, white, piece}) {
+function Square({square, white, piece, active, onSquareClick}) {
   let c = 'square';
+
   if(white)
     c+=' light';
+  if(active)
+    c+=' active';
   const squareClick = () =>{
-    console.log(getPieceImage(piece));
+    onSquareClick({'square': square});
   }
   return (
     <div className={c} onClick={squareClick}>
