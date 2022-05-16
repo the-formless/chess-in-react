@@ -1,4 +1,6 @@
 import Board from "./Components/Board";
+import {chess} from "chess.js"
+import { Chess } from "chess.js";
 
 function getChessBoardArray() {
   const files = [null, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -14,10 +16,12 @@ function getChessBoardArray() {
 }
 
 function App() {
+  const chess = new Chess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
   const boardArray = getChessBoardArray();
+  const gameArray = chess.board();
   return (
     <div className="App">
-      <Board arr={boardArray}/>
+      <Board arr={boardArray} game={gameArray}/>
     </div>
   );
 }

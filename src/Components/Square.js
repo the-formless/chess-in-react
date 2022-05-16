@@ -1,16 +1,16 @@
-import React from 'react'
+import {getPieceImage} from "./Dependencies/pieceRetriever.js"
 
 function Square({square, white, piece}) {
   let c = 'square';
   if(white)
     c+=' light';
   const squareClick = () =>{
-    console.log(piece);
+    console.log(getPieceImage(piece));
   }
   return (
     <div className={c} onClick={squareClick}>
       <p>{square}</p>
-      {piece && <img src={piece} className="piece" alt={`image of ${piece}`}/>}
+      {piece && <img src={getPieceImage(piece)} className="piece" alt={`image of ${piece}`}/>}
     </div>
   )
 }
