@@ -19,7 +19,7 @@ function firebaseInit() {
 
 function App() {
   const app = firebaseInit();
-  const thisPlayer = 'b'
+  const thisPlayer = 'w';
   const [chess, updateChess] = useState(new Chess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
   const chess2 = new Chess("r1k4r/p2nb1p1/2b4p/1p1n1p2/2PP4/3Q1NB1/1P3PPP/R5K1 b - c3 0 19");
 

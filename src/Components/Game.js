@@ -12,6 +12,15 @@ function Game({chess, thisPlayer}) {
   useEffect(()=>{
     nextMoves = currentMoves.map((v) => {
       //refactor this (doesnt include castling)
+      if(v.length > 2){
+        let sq = v.match(/[a-h][1-8]|O-O-O|O-O/i)[0];
+        if(sq === 'O-O-O'){
+          return (chess.turn() === 'b')? 'c8' : 'c1';
+        }
+        if(sq === 'O-O'){
+          return (chess.turn() === 'b')? 'g8' : 'g1';
+        }
+      }
       return (v.length > 2)? v.match(/[a-h][1-8]|O-O-O|O-O/i)[0] : v;
     });
     console.log(nextMoves);
@@ -45,7 +54,7 @@ function Game({chess, thisPlayer}) {
 
   return (
     <div className="Game">
-      <Board arr={boardArray} game={gameArray} boardClick={onBoardClick} activeMoves={currentMoves}/>
+      <Board arr={boardArray} game={gameArray} boardClick={onBoardClick} activeMoves={currentMoves} currentPlayer={chess.turn()}/>
     </div>
   );
 }

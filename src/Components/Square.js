@@ -4,15 +4,15 @@ function Square({square, white, piece, active, onSquareClick}) {
   let c = 'square';
 
   if(white)
-    c+=' light';
+    c+=' light';    //marks white squares
   if(active)
-    c+=' active';
+    c+=' active';   //gives green border for active moves
   const squareClick = () =>{
     onSquareClick({'square': square});
   }
   return (
     <div className={c} onClick={squareClick}>
-      <p>{square}</p>
+      <p>{/*square*/}</p>
       {piece && <img src={getPieceImage(piece)} className="piece" alt={`image of ${piece}`}/>}
     </div>
   )
