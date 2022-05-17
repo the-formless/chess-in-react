@@ -13,7 +13,7 @@ function Square({square, white, piece, active, onSquareClick}) {
   return (
     <div className={c} onClick={squareClick}>
       <p>{/*square*/}</p>
-      {piece && <img src={getPieceImage(piece)} className="piece" alt={`image of ${piece}`}/>}
+      {piece && <img src={getPieceImage(piece)} className="piece" alt={`Thie piece of ${piece}`}/>}
     </div>
   )
 }

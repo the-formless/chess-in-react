@@ -1,7 +1,7 @@
 //populates array b with values for white square {true/false} and name of squares {a1..a8, ...h8}
 
 function populateWithPositions(arr, game, activeMoves, currentPlayer) {
-  let moves, queenCastle, kingCastle;
+  let moves;
   //if there are active current moves stores list of squares to mark green in [moves]
   if(activeMoves)
     moves = activeMoves.map((v) => {

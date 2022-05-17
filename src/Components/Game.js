@@ -23,8 +23,8 @@ function Game({chess, thisPlayer}) {
       }
       return (v.length > 2)? v.match(/[a-h][1-8]|O-O-O|O-O/i)[0] : v;
     });
-    console.log(nextMoves);
-    console.log(currentMoves);
+    //console.log(nextMoves);
+    //console.log(currentMoves);
   }, [currentMoves]);
 
   const moves = (square) => {
