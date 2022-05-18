@@ -13,10 +13,7 @@ import { getFirestore, collection, addDoc, doc, updateDoc, getDoc } from "fireba
 import {
   BrowserRouter as Router,
   Routes,
-  Switch,
   Route,
-  Link,
-  useParams
 } from "react-router-dom";
 
 
@@ -26,17 +23,16 @@ function App() {
 
   const [chess, updateChess] = useState(new Chess("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
   const [thisPlayer, setThisPlayer] = useState('w');
-  const [players, setPlayers] = useState([]);
-  const [onlineUser] = useAuthState(getAuth());
+  const [playWith, setPlayWith] = useState("");
   const [docRef, setDocRef] = useState(null);
   const collRef = collection(db, 'chess-game');
   const [newFen] = useDocumentData(docRef);
 
 
   const setReady = async (player) => {
-    //do databse stuff
+    //sets player name and player color in the backend
     const currDoc = await (await getDoc(docRef)).data();
-    console.log(currDoc);
+    //console.log(currDoc);
     if(!currDoc.hasOwnProperty('player1')){
       const color = getRandomColor();
       const playColorArr = [player, color];
@@ -50,6 +46,7 @@ function App() {
       setThisPlayer(color);
     }
   }
+  //update on player ready
   const updateDatabaseOnline = (playerColorArr, player1) =>{
     let name = playerColorArr[0];
     let color = playerColorArr[1];
@@ -66,7 +63,6 @@ function App() {
   }
   const UpdateOnlineUser = async (user, document) => {
     if(user){
-      const currentUser = user.displayName;
       // handle online stuff
       // set this player
       // get game data if exist
@@ -85,30 +81,30 @@ function App() {
     return r > 0.49 ? 'w' : 'b';
   }
 
-  const UpdateGame = (chessObj) => {
-    // update game data online every move
-    let fen = chessObj.fen();
-    updateDoc(docRef, {
-      'fen': fen
-    });
-  }
-
-  const handleClick = "";
-
   useEffect(() => {
     if(newFen) {
       updateChess(new Chess(newFen.fen));
+      //change opposite player
+      if(!playWith){
+        if(newFen.hasOwnProperty('color1') && thisPlayer === newFen.color1){
+          if(newFen.hasOwnProperty('player2'))
+          setPlayWith(newFen.player2); 
+        }
+        if(newFen.hasOwnProperty('color2') && thisPlayer === newFen.color2)
+          setPlayWith(newFen.player1); 
+      }
     }
   }, [newFen]);
+
 
   return (
     <Router>
       <Routes>
           <Route path="/game/:doc" element={<MultiplayerAuth updateOnlineUser={UpdateOnlineUser} docRef={docRef} setReady={setReady}/>} />
-          <Route exact path="/" element={<GameModeSelector handleClick={handleClick} />} />
-          <Route path="/local" element={<Game chess={chess} thisPlayer={thisPlayer} updateGame={UpdateGame}/>} />
+          <Route exact path="/" element={<GameModeSelector />} />
+          <Route path="/local" element={<Game chess={chess} thisPlayer={thisPlayer} />} />
           <Route path="/multiplayer" element={<MultiplayerAuth updateOnlineUser={UpdateOnlineUser} docRef={docRef} setReady={setReady}/>}/> 
-          <Route path="/multiplayer/game/:doc" element={<MultiplayerGame chess={chess} thisPlayer={thisPlayer} updateGame={UpdateGame} />} />
+          <Route path="/multiplayer/game/:doc" element={<MultiplayerGame chess={chess} thisPlayer={thisPlayer} docRef={docRef} playWith={playWith}/>} />
       </Routes>
     </Router>
   );

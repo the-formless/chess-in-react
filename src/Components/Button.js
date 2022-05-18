@@ -1,9 +1,8 @@
 
-function Button({text,link, onClick}) {
+function Button({text}) {
   return (
     <div>
-      <a href={link}><button className="btn" onClick={() => onClick(text)}>{text}</button>
-      </a>
+      <button className="btn">{text}</button>
     </div>
   )
 }

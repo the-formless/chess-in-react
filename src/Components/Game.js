@@ -1,12 +1,16 @@
 import Board from "./Board";
 import {getChessBoardArray, getGameArray} from "./Dependencies/getBoardsArray.js";
 import {useEffect, useState} from 'react';
+import GameOver from "./GameOver";
 
 function Game({chess, thisPlayer, updateGame, mp}) {
 
   const boardArray = getChessBoardArray(thisPlayer);
   const [gameArray, updateGameArray] = useState(getGameArray(chess, thisPlayer));
   const [currentMoves, setCurrentMoves] = useState([]);
+
+  const [winner, setWinner] = useState('');
+  const [gameOverText, setGameOverText] = useState('')
 
   let nextMoves = [];
   useEffect(()=>{
@@ -40,7 +44,35 @@ function Game({chess, thisPlayer, updateGame, mp}) {
     chess.move(square);
     setCurrentMoves([]);
     updateGameArray(getGameArray(chess, thisPlayer));
-    updateGame(chess);
+    (mp) && updateGame(chess);
+    checkGameOver(chess);
+  }
+
+  const restartGame = () =>{
+    chess.load("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+    setWinner("");
+    setGameOverText("");
+    updateGameArray(getGameArray(chess, thisPlayer));
+  }
+
+  const checkGameOver = (chess) => {
+    if(chess.game_over()){
+      setWinner((chess.turn() === 'w')? 'b' : 'w');
+      if(chess.in_checkmate()){
+        setGameOverText("Wins By Checkmate")
+      }
+      if(chess.in_draw()){
+        if(chess.insufficient_material()){
+          setGameOverText("Draw due to insufficient material");
+        }
+        else {
+          setGameOverText("Draw due to 50 move rule");
+        }
+      }
+      if(chess.in_stalemate()){
+        setGameOverText("Draw due to Stalemate");
+      }
+    }
   }
 
   const onBoardClick = (square) => {
@@ -69,6 +101,9 @@ function Game({chess, thisPlayer, updateGame, mp}) {
   return (
     <div className="Game">
       <Board arr={boardArray} game={gameArray} boardClick={onBoardClick} activeMoves={currentMoves} currentPlayer={chess.turn()}/>
+      {
+        (winner) && <GameOver winner={winner} gameOverText={gameOverText} restartGame={restartGame}/>
+      }
     </div>
   );
 }

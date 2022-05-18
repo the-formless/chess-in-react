@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 
 
 function MultiplayerAuth({updateOnlineUser, docRef, setReady}) {
-  //const app = firebaseInit();
   const [shareUrl, setShareUrl] = useState("");
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
@@ -38,16 +37,15 @@ function MultiplayerAuth({updateOnlineUser, docRef, setReady}) {
   };
 
   useEffect(() => {
-    //console.log(docRef);
     if(docRef)
     {
       updateShareUrl(docRef);
     }
   }, [docRef]);
 
+  //generates an invite url for the game
   function updateShareUrl(doc) {
       let document = doc.path.slice(11);
-      //console.log(document);
       let locationStr = window.location+"game/"+document;
       const regText = '/multiplayer';
       let regex = new RegExp(regText);
@@ -70,10 +68,10 @@ function MultiplayerAuth({updateOnlineUser, docRef, setReady}) {
           Sign Out
         </button>}
         {
-        (shareUrl) && 
+        (shareUrl || user) && 
           <div className="share">
             <p>Share Game URL: </p>
-            <input value={shareUrl} readOnly={true}/>
+            <input value={(shareUrl)? shareUrl : "Please re-login"} readOnly={true}/>
             <Link to={"/multiplayer/game/onlinesession"}><button className="btn" onClick={()=>setReady(user.displayName)}>Ready</button></Link>
           </div>
         }

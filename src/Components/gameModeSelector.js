@@ -1,12 +1,12 @@
 import Button from "./Button"
-import { Routes, Route, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
-function GameModeSelector({handleClick}) {
+function GameModeSelector() {
   return (
     <div className="select-game-mode">
       <p>Select Game Mode:</p>
-      <Button text={"Local"} link={"/local"} />
-      <Button text={"Multiplayer"} link={"/multiplayer"} />
+      <Link to={"/local"}><Button text={"Local"} /></Link>
+      <Link to={"/multiplayer"}><Button text={"Multiplayer"} /></Link>
     </div>
   )
 }
