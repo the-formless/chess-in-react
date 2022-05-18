@@ -2,7 +2,7 @@ import Board from "./Board";
 import {getChessBoardArray, getGameArray} from "./Dependencies/getBoardsArray.js";
 import {useEffect, useState} from 'react';
 
-function Game({chess, thisPlayer, updateGame}) {
+function Game({chess, thisPlayer, updateGame, mp}) {
 
   const boardArray = getChessBoardArray(thisPlayer);
   const [gameArray, updateGameArray] = useState(getGameArray(chess, thisPlayer));
@@ -11,7 +11,7 @@ function Game({chess, thisPlayer, updateGame}) {
   let nextMoves = [];
   useEffect(()=>{
     nextMoves = currentMoves.map((v) => {
-      //refactor this (doesnt include castling)
+      //manages castling on all sides(black and white)
       if(v.length > 2){
         let sq = v.match(/[a-h][1-8]|O-O-O|O-O/i)[0];
         if(sq === 'O-O-O'){
@@ -44,16 +44,25 @@ function Game({chess, thisPlayer, updateGame}) {
   }
 
   const onBoardClick = (square) => {
+    if(mp && chess.turn() === thisPlayer)
+    {
+      handleClick(square);
+    }
+    else if(!mp) {
+      handleClick(square);
+    }
+  }
+  function handleClick(square) {
     if(nextMoves){
       let idx = nextMoves.indexOf(square.square);
       if(idx > -1)
         move(currentMoves[idx]);
       else
       setCurrentMoves(moves(square));
-    }
-    else{
-      setCurrentMoves(moves(square));
-    } 
+      }
+      else{
+        setCurrentMoves(moves(square));
+      } 
   }
   
 

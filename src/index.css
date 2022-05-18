@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Comfortaa&display=swap');
-
+body {
+  font-family: 'Amatic SC';
+}
 .App {
   margin: auto;
   max-width: 555px;
@@ -65,7 +67,7 @@
 }
 
 .share {
-  display: flex;
+  display: flex-column;
   font-family: monospace;
   font-size: large;
   color: black;
@@ -76,4 +78,5 @@
   align-self: center;
   background-color: beige;
   border-radius: 9px;
+  margin-bottom: 3px;
 }
