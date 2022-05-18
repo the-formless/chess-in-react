@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chess-in-react/static/css/main.03ff1032.css",
-    "main.js": "/chess-in-react/static/js/main.c532632c.js",
+    "main.js": "/chess-in-react/static/js/main.42aa9fc0.js",
     "static/js/787.71c56ee1.chunk.js": "/chess-in-react/static/js/787.71c56ee1.chunk.js",
     "static/media/rook_black.svg": "/chess-in-react/static/media/rook_black.fdc575582c2cbe2ec82093702945226f.svg",
     "static/media/night_black.svg": "/chess-in-react/static/media/night_black.7930be9e07b51bc0e069b1d77e31261a.svg",
@@ -13,15 +13,15 @@
     "static/media/bishop_black.svg": "/chess-in-react/static/media/bishop_black.04932f63ef10dcdee115b649286230f5.svg",
     "static/media/rook_white.svg": "/chess-in-react/static/media/rook_white.9e48b84f189eea24339f8a679e7a664f.svg",
     "static/media/queen_white.svg": "/chess-in-react/static/media/queen_white.7a1aecff0f22ff68c43f9b7f8a81d0b4.svg",
+    "index.html": "/chess-in-react/index.html",
     "static/media/pawn_black.svg": "/chess-in-react/static/media/pawn_black.be5d44ca5ee868885d216188996e3a00.svg",
     "static/media/pawn_white.svg": "/chess-in-react/static/media/pawn_white.50273cc6d86861932d0a01c38274009a.svg",
-    "index.html": "/chess-in-react/index.html",
     "main.03ff1032.css.map": "/chess-in-react/static/css/main.03ff1032.css.map",
-    "main.c532632c.js.map": "/chess-in-react/static/js/main.c532632c.js.map",
+    "main.42aa9fc0.js.map": "/chess-in-react/static/js/main.42aa9fc0.js.map",
     "787.71c56ee1.chunk.js.map": "/chess-in-react/static/js/787.71c56ee1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03ff1032.css",
-    "static/js/main.c532632c.js"
+    "static/js/main.42aa9fc0.js"
   ]
 }
