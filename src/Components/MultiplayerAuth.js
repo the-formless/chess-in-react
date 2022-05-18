@@ -1,27 +1,13 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/auth'
-import 'firebase/compat/firestore'
+//import 'firebase/compat/auth';
+//import 'firebase/compat/firestore';
 import {getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useEffect, useState } from "react";
+import {useAuthState} from 'react-firebase-hooks/auth';
 
-import {useAuthState} from 'react-firebase-hooks/auth'
-import {useCollectionData} from 'react-firebase-hooks/firestore'
 
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBrWcN79PZ3vLB885dqF8g_VY0s0KPztnY",
-  authDomain: "chess-in-react.firebaseapp.com",
-  projectId: "chess-in-react",
-  storageBucket: "chess-in-react.appspot.com",
-  messagingSenderId: "1070213244434",
-  appId: "1:1070213244434:web:8e52f71c0d3e1471cf1acb",
-  measurementId: "G-XHBPC2Z2T0"
-};
-function firebaseInit() {
-  return firebase.initializeApp(firebaseConfig);
-}
-
-function MultiplayerAuth({updateOnlineUser}) {
-  const app = firebaseInit();
+function MultiplayerAuth({updateOnlineUser, docRef}) {
+  //const app = firebaseInit();
+  const [shareUrl, setShareUrl] = useState("");
 
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
@@ -38,9 +24,21 @@ function MultiplayerAuth({updateOnlineUser}) {
       updateOnlineUser(null);
     });
   };
+
+  useEffect(() => {
+    //console.log(docRef);
+    if(docRef)
+    {
+      let document = docRef.path.slice(11);
+      //console.log(window.location+"game/"+document);
+      setShareUrl(window.location+"game/"+document);
+    }
+  }, [docRef])
+
+
   // When authenticated, show the Sign out button, else Sign in
   return (
-    <div className='select-game-mode'>
+    <div className='select-game-mode mp-module'>
       {(!user) &&
           <button className='btn' onClick={signIn}>
             Sign In
@@ -49,6 +47,10 @@ function MultiplayerAuth({updateOnlineUser}) {
         {(user) && <button className='btn' onClick={signOut}>
           Sign Out
         </button>}
+        {(shareUrl) && <div className="share">
+          <p>Share Game URL: </p>
+          <input value={shareUrl} readOnly='true'/>
+        </div>}
     </div>
   );
 }

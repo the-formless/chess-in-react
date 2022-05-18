@@ -2,7 +2,7 @@ import Board from "./Board";
 import {getChessBoardArray, getGameArray} from "./Dependencies/getBoardsArray.js";
 import {useEffect, useState} from 'react';
 
-function Game({chess, thisPlayer}) {
+function Game({chess, thisPlayer, updateGame}) {
 
   const boardArray = getChessBoardArray(thisPlayer);
   const [gameArray, updateGameArray] = useState(getGameArray(chess, thisPlayer));
@@ -27,6 +27,10 @@ function Game({chess, thisPlayer}) {
     //console.log(currentMoves);
   }, [currentMoves]);
 
+  useEffect(() =>{
+    updateGameArray(getGameArray(chess, thisPlayer));
+  }, [chess]);
+
   const moves = (square) => {
     return chess.moves(square);
   }
@@ -34,8 +38,9 @@ function Game({chess, thisPlayer}) {
   const move = (square) => {
     console.log("Move to "+ square);
     chess.move(square);
-    updateGameArray(getGameArray(chess, thisPlayer));
     setCurrentMoves([]);
+    updateGameArray(getGameArray(chess, thisPlayer));
+    updateGame(chess);
   }
 
   const onBoardClick = (square) => {
