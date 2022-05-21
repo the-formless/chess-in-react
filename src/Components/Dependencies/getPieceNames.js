@@ -12,6 +12,7 @@ import queenW from "../../assets/chess pieces/queen_white.svg"
 import kingW from "../../assets/chess pieces/king_white.svg"
 import pawnW from "../../assets/chess pieces/pawn_white.svg"
 
+//returns desired piece_names .svg file
 
 function getPawn(white){
   return (white)? pawnW: pawnB;

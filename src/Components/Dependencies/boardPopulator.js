@@ -2,7 +2,7 @@
 
 function populateWithPositions(arr, game, activeMoves, currentPlayer) {
   let moves;
-  //if there are active current moves stores list of squares to mark green in [moves]
+  //if there are active current moves(after a player clicks on a piece) stores list of squares to mark green in [moves]
   if(activeMoves)
     moves = activeMoves.map((v) => {
       if(v.length > 2){
@@ -18,6 +18,12 @@ function populateWithPositions(arr, game, activeMoves, currentPlayer) {
       }
       return v; 
     });
+
+//  combines all available information and return array of objects with format: 
+//  {'white': boolean, 'square': string, 'piece': null/string, 'active': boolean}
+//  white for rendering white/black, square for identifying chess squares(a1,b1,c1...h8), 
+//  piece for current piece on the square, active for showing active moves based on player choice
+  
   return arr.slice().flat().reduce((a, v, i) => {
     let next;
     let active = false;

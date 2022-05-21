@@ -1,3 +1,4 @@
+//returns an array based on 'player' if player is 'w'(white) returns array that will render with white at bottom else black
 function getChessBoardArray(player) {
   const files = [null, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   const boardArray = [];
@@ -13,7 +14,7 @@ function getChessBoardArray(player) {
   }
   return boardArray;
 }
-
+//returns current state of the game using chess.js api
 function getGameArray(chessBoard, player) {
   return (player === 'w')? chessBoard.board() : chessBoard.board().reverse();
 }

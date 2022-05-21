@@ -1,6 +1,8 @@
 import Button from "./Button"
 import { Link } from "react-router-dom"
 
+//initial screen component lets the player choose local/multiplayer
+
 function GameModeSelector() {
   return (
     <div className="select-game-mode">

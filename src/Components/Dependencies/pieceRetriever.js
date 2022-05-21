@@ -1,5 +1,6 @@
 import * as getPiece from "./getPieceNames.js"
 
+//creates abstraction to retrieve chess piece images
 function getPieceImage(piece){
 
   const keyFuncs = {
@@ -17,7 +18,6 @@ function getPieceImage(piece){
     'K': getPiece.getKing(true)
   }
   
-  //console.log(keyFuncs[piece] + " log from retriever");
   return keyFuncs[piece];
 }
 

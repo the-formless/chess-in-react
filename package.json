@@ -1,8 +1,7 @@
 {
   "name": "chess-in-react",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "https://the-formless.github.io/chess-in-react/",
+  "private": false,
   "dependencies": {
     "-": "^0.0.1",
     "@testing-library/jest-dom": "^5.16.4",

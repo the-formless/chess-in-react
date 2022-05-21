@@ -1,11 +1,10 @@
-//import 'firebase/compat/auth';
-//import 'firebase/compat/firestore';
 import {getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useEffect, useState } from "react";
 import {useAuthState} from 'react-firebase-hooks/auth';
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+// Handles Multiplayer functionality
 
 function MultiplayerAuth({updateOnlineUser, docRef, setReady}) {
   const [shareUrl, setShareUrl] = useState("");

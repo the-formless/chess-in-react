@@ -5,14 +5,15 @@ import GameOver from "./GameOver";
 
 function Game({chess, thisPlayer, updateGame, mp}) {
 
-  const boardArray = getChessBoardArray(thisPlayer);
-  const [gameArray, updateGameArray] = useState(getGameArray(chess, thisPlayer));
-  const [currentMoves, setCurrentMoves] = useState([]);
+  const boardArray = getChessBoardArray(thisPlayer);          // gets corrct facing chess board based on player (black or white)
+  const [gameArray, updateGameArray] = useState(getGameArray(chess, thisPlayer));       //store current game array
+  const [currentMoves, setCurrentMoves] = useState([]);           //stores current possible moves after player clicks on a piece
 
   const [winner, setWinner] = useState('');
   const [gameOverText, setGameOverText] = useState('')
 
   let nextMoves = [];
+  //update active box on every new click on the board
   useEffect(()=>{
     nextMoves = currentMoves.map((v) => {
       //manages castling on all sides(black and white)
@@ -27,18 +28,19 @@ function Game({chess, thisPlayer, updateGame, mp}) {
       }
       return (v.length > 2)? v.match(/[a-h][1-8]|O-O-O|O-O/i)[0] : v;
     });
-    //console.log(nextMoves);
-    //console.log(currentMoves);
   }, [currentMoves]);
 
+  //updates the game board when chess object changes. (changing chess object is important for multiplayer)
   useEffect(() =>{
     updateGameArray(getGameArray(chess, thisPlayer));
   }, [chess]);
 
+  //gets possible moves from chess.js api
   const moves = (square) => {
     return chess.moves(square);
   }
 
+  //functionality for updating the game after every move
   const move = (square) => {
     console.log("Move to "+ square);
     chess.move(square);
@@ -62,6 +64,7 @@ function Game({chess, thisPlayer, updateGame, mp}) {
         setGameOverText("Wins By Checkmate")
       }
       if(chess.in_draw()){
+        setWinner(chess.turn());
         if(chess.insufficient_material()){
           setGameOverText("Draw due to insufficient material");
         }
@@ -84,6 +87,7 @@ function Game({chess, thisPlayer, updateGame, mp}) {
       handleClick(square);
     }
   }
+
   function handleClick(square) {
     if(nextMoves){
       let idx = nextMoves.indexOf(square.square);

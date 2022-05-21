@@ -98,10 +98,10 @@ function App() {
 
 
   return (
-    <Router>
+    <Router basename={`${process.env.PUBLIC_URL}`}>
       <Routes>
-          <Route path="/game/:doc" element={<MultiplayerAuth updateOnlineUser={UpdateOnlineUser} docRef={docRef} setReady={setReady}/>} />
           <Route exact path="/" element={<GameModeSelector />} />
+          <Route path="/game/:doc" element={<MultiplayerAuth updateOnlineUser={UpdateOnlineUser} docRef={docRef} setReady={setReady}/>} />
           <Route path="/local" element={<Game chess={chess} thisPlayer={thisPlayer} />} />
           <Route path="/multiplayer" element={<MultiplayerAuth updateOnlineUser={UpdateOnlineUser} docRef={docRef} setReady={setReady}/>}/> 
           <Route path="/multiplayer/game/:doc" element={<MultiplayerGame chess={chess} thisPlayer={thisPlayer} docRef={docRef} playWith={playWith}/>} />
